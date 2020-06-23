@@ -1,0 +1,30 @@
+
+<- Matrix ----------------------------------------------------------------------
+An instance can be contructed with an array that must have value:
+- 'preset' (with value of class constant IDENTITY, SCALE, RX, RY, RZ,
+TRANSLATION or PROJECTION, e.g.: new Matrix( array( 'preset' => Matrix::IDENTITY ) ); )
+
+Other values required based on preset:
+’scale’: the scale factor, mandatory when ’preset’ is worth SCALE.
+’angle’: the rotation angle in radians, mandatory when ’preset’ is worth RX, RY or RZ.
+’vtc’: translation vector, mandatory when ’preset’ is worth TRANSLATION.
+’fov’: projection field of view in degrees mandatory when ’preset’ is worth PROJECTION.
+’ratio’: projected image ratio, mandatory when ’preset’ is worth PROJECTION.
+’near’: projection’s near clipping plane mandatory when ’preset’ is worth PROJECTION.
+’far’: projection’s far clipping plane mandatory when ’preset’ is worth PROJECTION.
+
+You can enable verbose mode with Matrix::$verbose.
+
+Methods from the Matrix Class never modify the current instance. Once a
+matrix is instantiated, its status is final.
+
+Following public methods are provided:
+
+Matrix mult( Matrix $rhs );
+returns the multiplication of both matrices.
+
+Vertex transformVertex( Vertex $vtx );
+returns a new vertex resulting from
+the transformation of the vertex by the matrix.
+
+---------------------------------------------------------------------- Matrix ->
