@@ -13,7 +13,7 @@ class Camera {
 	private $_proj;
 	private $_ratio;
 	private $_fov;
-	
+
 	public static $verbose = FALSE;
 
 	public function __construct(array $array)
@@ -22,7 +22,7 @@ class Camera {
 			return FALSE;
 		if (!isset($array['orientation']) || !($array['orientation'] instanceof Matrix))
 			return FALSE;
-		if (!isset($array['fov']) || !isset($array['near']) || !isset($array['far'])) 
+		if (!isset($array['fov']) || !isset($array['near']) || !isset($array['far']))
 			return FALSE;
 		if (isset($array['ratio']))
 			$this->_ratio = $array['ratio'];
@@ -63,7 +63,7 @@ class Camera {
 
 	public function __toString()
 	{
-		$string = "Camera(" . PHP_EOL .
+		$string = "Camera( " . PHP_EOL .
 			"+ Origine: {$this->_origin->__toString()}" . PHP_EOL .
 			"+ tT:" . PHP_EOL .
 			$this->_tT->__toString() . PHP_EOL .

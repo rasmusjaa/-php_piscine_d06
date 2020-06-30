@@ -1,6 +1,6 @@
 
 <- Vector ----------------------------------------------------------------------
-An instance can be contructed with an array that has values:
+An instance can be constructed with an array that has values:
 - dest (instance of Vertex)
 - orig (optional, instance of Vertex)
 

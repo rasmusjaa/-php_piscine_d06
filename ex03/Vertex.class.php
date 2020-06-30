@@ -40,8 +40,8 @@ class Vertex {
 	{
 		return "Vertex( x: " . number_format($this->_x, 2, ".", "") .
 			", y: " . number_format($this->_y, 2, ".", "") .
-			", z: " . number_format($this->_z, 2, ".", "") .
-			", w: " . number_format($this->_w, 2, ".", "") .
+			", z:" . number_format($this->_z, 2, ".", "") .
+			", w:" . number_format($this->_w, 2, ".", "") .
 			(self::$verbose ? ", " . $this->_color : "") .
 			" )";
 	}
@@ -63,17 +63,17 @@ class Vertex {
 	public function setW( $w ) { $this->_w = $w; }
 	public function setColor( Color $color ) { $this->_color = $color; }
 
-	public function __get( $property )
-    {
+	public function get( $property )
+	{
 		if (property_exists($this, $property))
 			return $this->$property;
 		$func = 'get'.strtoupper($property);
 		if (method_exists($this, $func))
 			return $this->$func();
-    }
+	}
 
-    public function __set( $property, $value )
-    {
+	public function set( $property, $value )
+	{
 		if (property_exists($this, $property))
 		{
 			switch($property) {
@@ -81,8 +81,10 @@ class Vertex {
 				case "_y":
 				case "_z":
 				case "_w":
-					if (is_float($value))
+					if (is_float($value)) {
 						$this->$property = $value;
+						$break;
+					}
 				case "_color":
 					if (strtolower(get_class($value)) == "color")
 						$this->$property = $value;
@@ -92,6 +94,6 @@ class Vertex {
 		$func = 'set'.strtoupper($property);
 		if (method_exists($this, $func))
 			return $this->$func($value);
-    }
+	}
 }
 ?>

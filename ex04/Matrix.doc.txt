@@ -1,6 +1,6 @@
 
 <- Matrix ----------------------------------------------------------------------
-An instance can be contructed with an array that must have value:
+An instance can be constructed with an array that must have value:
 - 'preset' (with value of class constant IDENTITY, SCALE, RX, RY, RZ,
 TRANSLATION or PROJECTION, e.g.: new Matrix( array( 'preset' => Matrix::IDENTITY ) ); )
 

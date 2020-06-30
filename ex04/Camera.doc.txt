@@ -1,4 +1,27 @@
 
 <- Camera ----------------------------------------------------------------------
-Your documentation here.
+The Camera class handles how we see our world (made with vectors, vertexes
+and colors).
+
+An instance can be contructed with location (vertex), orientation
+(rotation matrix), screen width and height (OR ratio), fov, and near and far
+limits:
+$vtxO = new Vertex( array( 'x' => 20.0, 'y' => 20.0, 'z' => 80.0 ) );
+$R    = new Matrix( array( 'preset' => Matrix::RY, 'angle' => M_PI ) );
+$cam  = new Camera( array( 'origin' => $vtxO,
+						   'orientation' => $R,
+						   'width' => 640,
+						   'height' => 480,
+						   'fov' => 60,
+						   'near' => 1.0,
+						   'far' => 100.0) );
+
+Width and height are used for ratio, so you can use either of them.
+Any other use is undefined behaviour.
+
+The class provides the following methods :
+
+Vertex function watchVertex( $worldVertex );
+Transforms "world" coordinates vertex into a "screen" coordinates vertex
+(a pixel basically).
 ---------------------------------------------------------------------- Camera ->

@@ -28,8 +28,8 @@ class Matrix {
 	public function __construct(array $array)
 	{
 		if (!isset($array['preset']) || !in_array($array['preset'], [
-			self::IDENTITY, self::SCALE, 
-			self::RX, self::RY, self::RZ, 
+			self::IDENTITY, self::SCALE,
+			self::RX, self::RY, self::RZ,
 			self::TRANSLATION, self::PROJECTION
         	]))
 				return FALSE;
@@ -84,9 +84,9 @@ class Matrix {
 	private function presetTranslation($array)
 	{
 		$this->presetIdentity();
-		$this->_matrix[0][3] = $array['vtc']->x;
-		$this->_matrix[1][3] = $array['vtc']->y;
-		$this->_matrix[2][3] = $array['vtc']->z;
+		$this->_matrix[0][3] = $array['vtc']->GetX();
+		$this->_matrix[1][3] = $array['vtc']->GetY();
+		$this->_matrix[2][3] = $array['vtc']->GetZ();
 	}
 
 	private function presetScale($array)
@@ -129,9 +129,9 @@ class Matrix {
 
 	private function presetProjection($array)
 	{
-		$scale = 1 / tan($array['fov'] * 0.5 * M_PI / 180); 
-		$this->_matrix[0][0] = $scale / $array['ratio']; // scale the x coordinates of the projected point 
-		$this->_matrix[1][1] = $scale; // scale the y coordinates of the projected point 
+		$scale = 1 / tan($array['fov'] * 0.5 * M_PI / 180);
+		$this->_matrix[0][0] = $scale / $array['ratio']; // scale the x coordinates of the projected point
+		$this->_matrix[1][1] = $scale; // scale the y coordinates of the projected point
 		$this->_matrix[2][2] = -1 * (($array['far'] + $array['near']) / ($array['far'] - $array['near']));
 		$this->_matrix[2][3] = -1 * ((2 * $array['far'] * $array['near']) / ($array['far'] - $array['near']));
 		$this->_matrix[3][2] = -1;
@@ -161,22 +161,22 @@ class Matrix {
 
 	public function transformVertex($vtx)
 	{
-		$x = $vtx->_x * $this->_matrix[0][0] +
-			$vtx->_y * $this->_matrix[0][1] +
-			$vtx->_z * $this->_matrix[0][2] +
-			$vtx->_w * $this->_matrix[0][3];
-		$y = $vtx->_x * $this->_matrix[1][0] +
-			$vtx->_y * $this->_matrix[1][1] +
-			$vtx->_z * $this->_matrix[1][2] +
-			$vtx->_w * $this->_matrix[1][3];
-		$z = $vtx->_x * $this->_matrix[2][0] +
-			$vtx->_y * $this->_matrix[2][1] +
-			$vtx->_z * $this->_matrix[2][2] +
-			$vtx->_w * $this->_matrix[2][3];
-		$w = $vtx->_x * $this->_matrix[3][0] +
-			$vtx->_y * $this->_matrix[3][1] +
-			$vtx->_z * $this->_matrix[3][2] +
-			$vtx->_w * $this->_matrix[3][3];
+		$x = $vtx->getX() * $this->_matrix[0][0] +
+			$vtx->getY() * $this->_matrix[0][1] +
+			$vtx->getZ() * $this->_matrix[0][2] +
+			$vtx->getW() * $this->_matrix[0][3];
+		$y = $vtx->getX() * $this->_matrix[1][0] +
+			$vtx->getY() * $this->_matrix[1][1] +
+			$vtx->getZ() * $this->_matrix[1][2] +
+			$vtx->getW() * $this->_matrix[1][3];
+		$z = $vtx->getX() * $this->_matrix[2][0] +
+			$vtx->getY() * $this->_matrix[2][1] +
+			$vtx->getZ() * $this->_matrix[2][2] +
+			$vtx->getW() * $this->_matrix[2][3];
+		$w = $vtx->getX() * $this->_matrix[3][0] +
+			$vtx->getY() * $this->_matrix[3][1] +
+			$vtx->getZ() * $this->_matrix[3][2] +
+			$vtx->getW() * $this->_matrix[3][3];
 		return new Vertex( array( 'x' => $x, 'y' => $y, 'z' => $z, 'w' => $w ) );
 	}
 

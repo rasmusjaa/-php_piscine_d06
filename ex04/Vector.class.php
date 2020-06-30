@@ -18,9 +18,9 @@ class Vector {
 			return FALSE;
 		if (!isset($vertex['orig']))
 			$vertex['orig'] = new Vertex( array( 'x' => 0.0, 'y' => 0.0, 'z' => 0.0 ) );
-		$this->_x = $vertex['dest']->x - $vertex['orig']->x;
-		$this->_y = $vertex['dest']->y - $vertex['orig']->y;
-		$this->_z = $vertex['dest']->z - $vertex['orig']->z;
+		$this->_x = $vertex['dest']->getX() - $vertex['orig']->getX();
+		$this->_y = $vertex['dest']->getY() - $vertex['orig']->getY();
+		$this->_z = $vertex['dest']->getZ() - $vertex['orig']->getZ();
 		if (self::$verbose) {
 			echo $this->__toString() . " constructed" . PHP_EOL;
 		}
@@ -35,7 +35,7 @@ class Vector {
 
 	public function __toString()
 	{
-		return "Vector( x: " . number_format($this->_x, 2, ".", "") .
+		return "Vector( x:" . number_format($this->_x, 2, ".", "") .
 			", y:" . number_format($this->_y, 2, ".", "") .
 			", z:" . number_format($this->_z, 2, ".", "") .
 			", w:" . number_format($this->_w, 2, ".", "") .
@@ -52,7 +52,7 @@ class Vector {
 	public function getZ() { return $this->_z; }
 	public function getW() { return $this->_w; }
 
-	public function __get( $property )
+	public function get( $property )
     {
 		if (property_exists($this, $property))
 			return $this->$property;
@@ -60,8 +60,8 @@ class Vector {
 		if (method_exists($this, $func))
 			return $this->$func();
 	}
-	
-	public function __set($property, $value)
+
+	public function set($property, $value)
 	{
 		return false;
 	}
@@ -90,9 +90,9 @@ class Vector {
 		else
 		{
 			return new Vector( array( 'dest' => new Vertex([
-				'x' => 0,
-				'y' => 0,
-				'z' => 0
+				'x' => $this->_x,
+				'y' => $this->_y,
+				'z' => $this->_z
 			])));
 		}
 	}
